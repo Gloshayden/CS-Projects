@@ -4,19 +4,6 @@ namespace UserInfo
 {
     class Program
     {
-        static bool appup()
-        {
-            Console.WriteLine("Do you want to continue? (Y/N)");
-            string online = Console.ReadLine();
-            if (online == "Y")
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
         static string GetName()
         {
             static string firstncheck()

@@ -1,0 +1,14 @@
+c:\Users\comp5276352\Documents\c#\UserInfo\bin\Debug\net7.0\UserInfo.exe
+c:\Users\comp5276352\Documents\c#\UserInfo\bin\Debug\net7.0\UserInfo.deps.json
+c:\Users\comp5276352\Documents\c#\UserInfo\bin\Debug\net7.0\UserInfo.runtimeconfig.json
+c:\Users\comp5276352\Documents\c#\UserInfo\bin\Debug\net7.0\UserInfo.dll
+c:\Users\comp5276352\Documents\c#\UserInfo\bin\Debug\net7.0\UserInfo.pdb
+c:\Users\comp5276352\Documents\c#\UserInfo\obj\Debug\net7.0\UserInfo.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\comp5276352\Documents\c#\UserInfo\obj\Debug\net7.0\UserInfo.AssemblyInfoInputs.cache
+c:\Users\comp5276352\Documents\c#\UserInfo\obj\Debug\net7.0\UserInfo.AssemblyInfo.cs
+c:\Users\comp5276352\Documents\c#\UserInfo\obj\Debug\net7.0\UserInfo.csproj.CoreCompileInputs.cache
+c:\Users\comp5276352\Documents\c#\UserInfo\obj\Debug\net7.0\UserInfo.dll
+c:\Users\comp5276352\Documents\c#\UserInfo\obj\Debug\net7.0\refint\UserInfo.dll
+c:\Users\comp5276352\Documents\c#\UserInfo\obj\Debug\net7.0\UserInfo.pdb
+c:\Users\comp5276352\Documents\c#\UserInfo\obj\Debug\net7.0\UserInfo.genruntimeconfig.cache
+c:\Users\comp5276352\Documents\c#\UserInfo\obj\Debug\net7.0\ref\UserInfo.dll

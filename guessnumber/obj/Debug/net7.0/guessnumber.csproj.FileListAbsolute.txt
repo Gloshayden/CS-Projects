@@ -1,0 +1,15 @@
+c:\Users\comp5276352\Documents\CS-Projects\guessnumber\obj\Debug\net7.0\guessnumber.csproj.AssemblyReference.cache
+c:\Users\comp5276352\Documents\CS-Projects\guessnumber\obj\Debug\net7.0\guessnumber.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\comp5276352\Documents\CS-Projects\guessnumber\obj\Debug\net7.0\guessnumber.AssemblyInfoInputs.cache
+c:\Users\comp5276352\Documents\CS-Projects\guessnumber\obj\Debug\net7.0\guessnumber.AssemblyInfo.cs
+c:\Users\comp5276352\Documents\CS-Projects\guessnumber\obj\Debug\net7.0\guessnumber.csproj.CoreCompileInputs.cache
+c:\Users\comp5276352\Documents\CS-Projects\guessnumber\bin\Debug\net7.0\guessnumber.exe
+c:\Users\comp5276352\Documents\CS-Projects\guessnumber\bin\Debug\net7.0\guessnumber.deps.json
+c:\Users\comp5276352\Documents\CS-Projects\guessnumber\bin\Debug\net7.0\guessnumber.runtimeconfig.json
+c:\Users\comp5276352\Documents\CS-Projects\guessnumber\bin\Debug\net7.0\guessnumber.dll
+c:\Users\comp5276352\Documents\CS-Projects\guessnumber\bin\Debug\net7.0\guessnumber.pdb
+c:\Users\comp5276352\Documents\CS-Projects\guessnumber\obj\Debug\net7.0\guessnumber.dll
+c:\Users\comp5276352\Documents\CS-Projects\guessnumber\obj\Debug\net7.0\refint\guessnumber.dll
+c:\Users\comp5276352\Documents\CS-Projects\guessnumber\obj\Debug\net7.0\guessnumber.pdb
+c:\Users\comp5276352\Documents\CS-Projects\guessnumber\obj\Debug\net7.0\guessnumber.genruntimeconfig.cache
+c:\Users\comp5276352\Documents\CS-Projects\guessnumber\obj\Debug\net7.0\ref\guessnumber.dll

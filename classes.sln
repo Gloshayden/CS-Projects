@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "classes", "classes\classes.csproj", "{68D66B96-3FE7-44F7-A9DC-786FFE50897B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "noteapp", "noteapp\noteapp.csproj", "{F3496E21-1B47-4B4E-8047-18D2F62D9509}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{68D66B96-3FE7-44F7-A9DC-786FFE50897B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68D66B96-3FE7-44F7-A9DC-786FFE50897B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68D66B96-3FE7-44F7-A9DC-786FFE50897B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3496E21-1B47-4B4E-8047-18D2F62D9509}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3496E21-1B47-4B4E-8047-18D2F62D9509}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3496E21-1B47-4B4E-8047-18D2F62D9509}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3496E21-1B47-4B4E-8047-18D2F62D9509}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

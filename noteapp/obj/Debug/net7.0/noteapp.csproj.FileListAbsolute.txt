@@ -1,0 +1,15 @@
+c:\Users\comp5276352\Documents\CS-Projects\noteapp\bin\Debug\net7.0\noteapp.exe
+c:\Users\comp5276352\Documents\CS-Projects\noteapp\bin\Debug\net7.0\noteapp.deps.json
+c:\Users\comp5276352\Documents\CS-Projects\noteapp\bin\Debug\net7.0\noteapp.runtimeconfig.json
+c:\Users\comp5276352\Documents\CS-Projects\noteapp\bin\Debug\net7.0\noteapp.dll
+c:\Users\comp5276352\Documents\CS-Projects\noteapp\bin\Debug\net7.0\noteapp.pdb
+c:\Users\comp5276352\Documents\CS-Projects\noteapp\obj\Debug\net7.0\noteapp.csproj.AssemblyReference.cache
+c:\Users\comp5276352\Documents\CS-Projects\noteapp\obj\Debug\net7.0\noteapp.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\comp5276352\Documents\CS-Projects\noteapp\obj\Debug\net7.0\noteapp.AssemblyInfoInputs.cache
+c:\Users\comp5276352\Documents\CS-Projects\noteapp\obj\Debug\net7.0\noteapp.AssemblyInfo.cs
+c:\Users\comp5276352\Documents\CS-Projects\noteapp\obj\Debug\net7.0\noteapp.csproj.CoreCompileInputs.cache
+c:\Users\comp5276352\Documents\CS-Projects\noteapp\obj\Debug\net7.0\noteapp.dll
+c:\Users\comp5276352\Documents\CS-Projects\noteapp\obj\Debug\net7.0\refint\noteapp.dll
+c:\Users\comp5276352\Documents\CS-Projects\noteapp\obj\Debug\net7.0\noteapp.pdb
+c:\Users\comp5276352\Documents\CS-Projects\noteapp\obj\Debug\net7.0\noteapp.genruntimeconfig.cache
+c:\Users\comp5276352\Documents\CS-Projects\noteapp\obj\Debug\net7.0\ref\noteapp.dll

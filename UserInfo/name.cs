@@ -4,6 +4,19 @@ namespace UserInfo
 {
     class Program
     {
+        ststic bool appup()
+        {
+            Console.WriteLine("Do you want to continue? (y/n)");
+            string online = Console.ReadLine()!;
+            if (online == "y")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         static string GetName()
         {
             static string firstncheck()
@@ -53,18 +66,21 @@ namespace UserInfo
         }
         static void Main(string[] args)
         {
-            string Uname = GetName();
-            while (Uname == "retry")
+            do
             {
-                Uname = GetName();
-            }
-            Console.WriteLine($"Full name: {Uname}");
-            int age = GetAge();
-            while (age == 0)
-            {
-                age = GetAge();
-            }
-            Console.WriteLine($"Welcome {Uname}, you are {age} years old.");
+                string Uname = GetName();
+                while (Uname == "retry")
+                {
+                    Uname = GetName();
+                }
+                Console.WriteLine($"Full name: {Uname}");
+                int age = GetAge();
+                while (age == 0)
+                {
+                    age = GetAge();
+                }
+                Console.WriteLine($"Welcome {Uname}, you are {age} years old.");
+            } while (appup() == true);
         }
     }
 }

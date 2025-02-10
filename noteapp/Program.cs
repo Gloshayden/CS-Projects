@@ -23,7 +23,7 @@
                 Console.WriteLine("Folder Created");
             }
         }
-        static string[] GetNotes()
+        static string[] GetNotes(byte[] key, byte[] iv)
         {
             if (!Directory.EnumerateFileSystemEntries("notes").Any())
             {
@@ -32,29 +32,50 @@
             }
             else
             {
-                string[] notes = Directory.GetFiles("notes");
-                return notes;
+                string[] encryptedNotes = Directory.GetFiles("notes");
+                string[] decryptedNotes = new string[encryptedNotes.Length];
+
+                for (int i = 0; i < encryptedNotes.Length; i++)
+                {
+                    string encryptedNote = Path.GetFileNameWithoutExtension(encryptedNotes[i]);
+                    byte[] encryptedBytes = Convert.FromBase64String(encryptedNote);
+                    string decryptedNote = EncryptionHelper.DecryptString(encryptedBytes, key, iv);
+                    decryptedNotes[i] = decryptedNote;
+                }
+                return decryptedNotes;
             }
         }
-        static void AddNote()
+        static void AddNote(byte[] key, byte[] iv)
         {
             Console.WriteLine("Enter the name of the note");
             string note = Console.ReadLine()!;
-            string path = $"notes/{note}.txt";
-            using (File.Create(path)) { }
+            string encryptedNote = Convert.ToBase64String(EncryptionHelper.EncryptString(note, key, iv));
+
             Console.WriteLine("Do you want to add a description to the note? (y/n)");
             string answer = Console.ReadLine()!;
             if (answer == "y")
             {
                 Console.WriteLine("Enter the description");
                 string description = Console.ReadLine()!;
-                using (StreamWriter writer = File.AppendText(path))
+                byte[] encryptedDescriptionBytes = EncryptionHelper.EncryptString(description, key, iv);
+                if (encryptedDescriptionBytes != null)
                 {
-                    writer.WriteLine(description);
+                    string encryptedDescription = Convert.ToBase64String(encryptedDescriptionBytes);
+                    string path = $"notes/{encryptedNote}";
+                    using (File.Create(path)) { }
+
+                    using (StreamWriter writer = File.AppendText(path))
+                    {
+                        writer.WriteLine(encryptedDescription);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Error encrypting description");
                 }
             }
         }
-        static string EditNote(string path)
+        static string EditNote(string path, byte[] key, byte[] iv)
         {
             Console.WriteLine("Enter the one of the following commands");
             Console.WriteLine("Edit Description, Delete Note, Edit title, Back");
@@ -75,53 +96,68 @@
             {
                 Console.WriteLine("Enter the new title");
                 string title = Console.ReadLine()!;
-                string newpath = $"notes/{title}.txt";
+                string newpath = $"notes/{title}";
                 File.Move(path, newpath);
                 path = newpath;
                 return "back";
             }
-            else if (command == "Back")
-            {
-                return "back";
-            }
+            else if (command == "Back") { return "back".ToLower(); }
             else{ return "invalid command"; }
         }
         static void Main(string[] args)
         {
+            if (!File.Exists("key.bin") && !File.Exists("password.bin") && !File.Exists("iv.bin"))
+            {
+                EncryptionHelper.CreatePassKey();
+            }
+            else 
+            {
+                byte[] key = File.ReadAllBytes("key.bin");
+                byte[] iv = File.ReadAllBytes("iv.bin");
+                EncryptionHelper.DecryptPassKey(); 
+            }
             do
             {
+                byte[] key = File.ReadAllBytes("key.bin");
+                byte[] iv = File.ReadAllBytes("iv.bin");
                 NoteFolder();
-                string[] notes = GetNotes();
+                string[] notes = GetNotes(key, iv);
                 while (notes == null) 
                 {
                    Console.WriteLine("Do you want to add a note? (y/n)");
                     string nonoteanswer = Console.ReadLine()!;
-                    if (nonoteanswer == "y") { AddNote(); } 
-                    notes = GetNotes();
+                    if (nonoteanswer == "y") { AddNote(key, iv); } 
+                    notes = GetNotes(key, iv);
                 }
                 for (int i = 0; i < notes.Length; i++)
                 {
-                    Console.WriteLine(notes[i].Remove(0,6));
+                    Console.WriteLine(notes[i]);
                 }
                 Console.WriteLine("Do you want to add a note? (y/n)");
                 string answer = Console.ReadLine()!;
-                if (answer == "y") { AddNote(); }
+                if (answer == "y") { AddNote(key, iv); }
                 Console.WriteLine("Do you want to read a note? (y/n)");
                 answer = Console.ReadLine()!;
                 if (answer == "y")
                 {
                     Console.WriteLine("Enter the name of the note you want to read");
                     string note = Console.ReadLine()!;
-                    string path = $"notes/{note}.txt";
-                    string[] lines = File.ReadAllLines(path);
-                    for (int i = 0; i < lines.Length; i++)
+                    byte[] encryptedNote = Convert.FromBase64String(note);
+                    note = EncryptionHelper.DecryptString(encryptedNote, key, iv);
+                    string path = $"notes/{note}";
+                    string[] encryptedLines = File.ReadAllLines(path);
+                    for (int i = 0; i < encryptedLines.Length; i++)
                     {
-                        Console.WriteLine(lines[i]);
+                        string encryptedLine = Path.GetFileName(encryptedLines[i]);
+                        byte[] encryptedBytes = Convert.FromBase64String(encryptedLine);
+                        string decryptedLine = EncryptionHelper.DecryptString(encryptedBytes, key, iv);
+                        encryptedLines[i] = decryptedLine;
+                        Console.WriteLine(encryptedLines[i]);
                         Console.WriteLine();
                     }
-                    while (EditNote(path).ToLower() != "back")
+                    while (EditNote(path,key,iv) != "back")
                     {
-                        path = EditNote(path);
+                        path = EditNote(path, key,iv);
                     }
                 }
             } while (appup() == true);

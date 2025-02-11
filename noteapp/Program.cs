@@ -38,7 +38,7 @@
                 for (int i = 0; i < encryptedNotes.Length; i++)
                 {
                     string encryptedNote = Path.GetFileNameWithoutExtension(encryptedNotes[i]);
-                    byte[] encryptedBytes = Convert.FromBase64String(encryptedNote);
+                    byte[] encryptedBytes = Convert.FromHexString(encryptedNote);
                     string decryptedNote = EncryptionHelper.DecryptString(encryptedBytes, key, iv);
                     decryptedNotes[i] = decryptedNote;
                 }
@@ -49,33 +49,33 @@
         {
             Console.WriteLine("Enter the name of the note");
             string note = Console.ReadLine()!;
-            string encryptedNote = Convert.ToBase64String(EncryptionHelper.EncryptString(note, key, iv));
-
-            Console.WriteLine("Do you want to add a description to the note? (y/n)");
-            string answer = Console.ReadLine()!;
-            if (answer == "y")
+            byte[] encryptedNote = EncryptionHelper.EncryptString(note, key, iv);
+            note = Convert.ToHexString(encryptedNote);
+            Console.WriteLine("Please enter a description to the note");
+            string description = Console.ReadLine()!;
+            byte[] encryptedDescriptionBytes = EncryptionHelper.EncryptString(description, key, iv);
+            if (encryptedDescriptionBytes != null)
             {
-                Console.WriteLine("Enter the description");
-                string description = Console.ReadLine()!;
-                byte[] encryptedDescriptionBytes = EncryptionHelper.EncryptString(description, key, iv);
-                if (encryptedDescriptionBytes != null)
+                string encryptedDescription = Convert.ToBase64String(encryptedDescriptionBytes);
+                string path = $"notes/{note}";
+                Console.WriteLine(path);
+                try
                 {
-                    string encryptedDescription = Convert.ToBase64String(encryptedDescriptionBytes);
-                    string path = $"notes/{encryptedNote}";
-                    using (File.Create(path)) { }
-
-                    using (StreamWriter writer = File.AppendText(path))
-                    {
-                        writer.WriteLine(encryptedDescription);
-                    }
+                    File.WriteAllText(path, encryptedDescription);
+                    Console.WriteLine("Note created");
                 }
-                else
+                catch (Exception ex)
                 {
-                    Console.WriteLine("Error encrypting description");
+                    Console.WriteLine(ex.Message);
                 }
             }
+            else
+            {
+                Console.WriteLine("Error encrypting description");
+            }
+        
         }
-        static string EditNote(string path, byte[] key, byte[] iv)
+        static bool EditNote(string path, byte[] key, byte[] iv)
         {
             Console.WriteLine("Enter the one of the following commands");
             Console.WriteLine("Edit Description, Delete Note, Edit title, Back");
@@ -84,25 +84,29 @@
             {
                 Console.WriteLine("Enter the new description");
                 string description = Console.ReadLine()!;
+                byte[] encryptedDescription = EncryptionHelper.EncryptString(description, key, iv);
+                description = Convert.ToBase64String(encryptedDescription);
                 File.WriteAllText(path, description);
-                return "new description added";
+                return true;
             }
             else if (command == "Delete Note")
             {
                 File.Delete(path);
-                return "note deleted";
+                return false;
             }
             else if (command == "Edit title")
             {
                 Console.WriteLine("Enter the new title");
                 string title = Console.ReadLine()!;
+                byte[] encryptedTitle = EncryptionHelper.EncryptString(title, key, iv);
+                title = Convert.ToHexString(encryptedTitle);
                 string newpath = $"notes/{title}";
                 File.Move(path, newpath);
                 path = newpath;
-                return "back";
+                return false;
             }
-            else if (command == "Back") { return "back".ToLower(); }
-            else{ return "invalid command"; }
+            else if (command == "Back") { return false; }
+            else{ return true; }
         }
         static void Main(string[] args)
         {
@@ -142,23 +146,20 @@
                 {
                     Console.WriteLine("Enter the name of the note you want to read");
                     string note = Console.ReadLine()!;
-                    byte[] encryptedNote = Convert.FromBase64String(note);
-                    note = EncryptionHelper.DecryptString(encryptedNote, key, iv);
+                    byte[] encryptedNote = EncryptionHelper.EncryptString(note, key, iv);
+                    note = Convert.ToHexString(encryptedNote);
                     string path = $"notes/{note}";
                     string[] encryptedLines = File.ReadAllLines(path);
                     for (int i = 0; i < encryptedLines.Length; i++)
                     {
-                        string encryptedLine = Path.GetFileName(encryptedLines[i]);
+                        string encryptedLine = encryptedLines[i];
                         byte[] encryptedBytes = Convert.FromBase64String(encryptedLine);
                         string decryptedLine = EncryptionHelper.DecryptString(encryptedBytes, key, iv);
                         encryptedLines[i] = decryptedLine;
                         Console.WriteLine(encryptedLines[i]);
                         Console.WriteLine();
                     }
-                    while (EditNote(path,key,iv) != "back")
-                    {
-                        path = EditNote(path, key,iv);
-                    }
+                    while (!EditNote(path,key,iv)) { break; }
                 }
             } while (appup() == true);
         }   

@@ -40,10 +40,10 @@ public static class EncryptionHelper
 
     public static string DecryptString(byte[] ciphertext, byte[] key, byte[] iv)
     {
-        if (ciphertext.Length % 16 != 0)
+        /*if (ciphertext.Length % 16 != 0)
         {
             throw new ArgumentException("Ciphertext must be a multiple of 16 bytes");
-        }
+        }*/
         using (var aes = Aes.Create())
         {
             aes.Key = key;

@@ -1,4 +1,7 @@
-﻿namespace noteapp
+﻿/* this app is far from perfect and will break if you dont put the write note name when asked 
+when i have more time i plan on fixing this but for now the program works (from what i tested)
+please let me know if you find any bugs by creating a github issue*/
+namespace noteapp
 {
     class Program
     {

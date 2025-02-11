@@ -7,18 +7,21 @@ namespace noteapp
     {
         static void Main(string[] args)
         {
-            if (!File.Exists("key.bin") && !File.Exists("password.bin") && !File.Exists("iv.bin"))
+            // check if the password and encryption files exist
+            if (!File.Exists("key.bin") & !File.Exists("password.bin") & !File.Exists("iv.bin"))
             {
                 EncryptionHelper.CreatePassKey();
             }
             else 
             {
+                //verifys the user
                 byte[] key = File.ReadAllBytes("key.bin");
                 byte[] iv = File.ReadAllBytes("iv.bin");
                 EncryptionHelper.DecryptPassKey(); 
             }
             do
             {
+                //gets the decrypted file names
                 byte[] key = File.ReadAllBytes("key.bin");
                 byte[] iv = File.ReadAllBytes("iv.bin");
                 App.NoteFolder();
@@ -34,6 +37,7 @@ namespace noteapp
                 {
                     Console.WriteLine(notes[i]);
                 }
+                //checks if the user wants to add a note or read a note (might condense it down to one input)
                 Console.WriteLine("Do you want to add a note? (y/n)");
                 string answer = Console.ReadLine()!;
                 if (answer == "y") { App.AddNote(key, iv); }
@@ -41,20 +45,22 @@ namespace noteapp
                 answer = Console.ReadLine()!;
                 if (answer == "y")
                 {
+                    //reads the note that the user wants and returns the decrypted note
                     Console.WriteLine("Enter the name of the note you want to read");
                     string note = Console.ReadLine()!;
                     byte[] encryptedNote = EncryptionHelper.EncryptString(note, key, iv);
-                    note = Convert.ToHexString(encryptedNote);
-                    string path = $"notes/{note}";
+                    string notetitle = Convert.ToHexString(encryptedNote);
+                    string path = $"notes/{notetitle}";
                     string[] encryptedLines = File.ReadAllLines(path);
                     for (int i = 0; i < encryptedLines.Length; i++)
                     {
+                        //decrypts and prints the note
                         string encryptedLine = encryptedLines[i];
                         byte[] encryptedBytes = Convert.FromBase64String(encryptedLine);
                         string decryptedLine = EncryptionHelper.DecryptString(encryptedBytes, key, iv);
                         encryptedLines[i] = decryptedLine;
-                        Console.WriteLine(encryptedLines[i]);
-                        Console.WriteLine();
+                        Console.WriteLine($"note name: {note}"); Console.WriteLine();
+                        Console.WriteLine(encryptedLines[i]); Console.WriteLine();
                     }
                     while (!App.EditNote(path,key,iv)) { break; }
                 }

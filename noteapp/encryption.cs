@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 
 public static class EncryptionHelper
 {
+    //Generate a new AES key and IV
     public static (byte[] key, byte[] iv) CreateKey()
     {
         using (var aes = Aes.Create())
@@ -18,11 +19,12 @@ public static class EncryptionHelper
     {
         File.WriteAllBytes(filename, key);
     }
-
+    //Method to encrypt the notes name and contents
     public static byte[] EncryptString(string plaintext, byte[] key, byte[] iv)
     {
         using (var aes = Aes.Create())
         {
+            //Uses the key and iv to encrypt the provided text
             aes.Key = key;
             aes.IV = iv;
             var encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
@@ -37,13 +39,9 @@ public static class EncryptionHelper
             }
         }
     }
-
+    //Mostly the same as the encryption method but uses the key and iv to decrypt
     public static string DecryptString(byte[] ciphertext, byte[] key, byte[] iv)
     {
-        /*if (ciphertext.Length % 16 != 0)
-        {
-            throw new ArgumentException("Ciphertext must be a multiple of 16 bytes");
-        }*/
         using (var aes = Aes.Create())
         {
             aes.Key = key;
@@ -61,6 +59,9 @@ public static class EncryptionHelper
             }
         }
     }
+    /*Generates a key and iv and stores them in files and asked the user to make a password
+    deleting the password file or the if/key files will render the app unusable if all files are deleted
+    new key and iv will be generated rendering the notes secure*/
     public static void CreatePassKey() 
     {
         var (key, iv) = CreateKey();
@@ -71,6 +72,7 @@ public static class EncryptionHelper
         byte[] encrypted = EncryptString(password, key, iv);
         StoreKeyInFile(encrypted, "password.bin"); 
     }
+    //Verifys the password using the key and iv and the saved password
     public static void DecryptPassKey()
     {
         byte[] key = File.ReadAllBytes("key.bin");

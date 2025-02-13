@@ -37,13 +37,11 @@ namespace noteapp
                 {
                     Console.WriteLine(notes[i]);
                 }
-                //checks if the user wants to add a note or read a note (might condense it down to one input)
-                Console.WriteLine("Do you want to add a note? (y/n)");
+                //checks if the user wants to add a note or read a note
+                Console.WriteLine("Do you want to Read or Add a note (Read/Add)");
                 string answer = Console.ReadLine()!;
-                if (answer == "y") { App.AddNote(key, iv); }
-                Console.WriteLine("Do you want to read a note? (y/n)");
-                answer = Console.ReadLine()!;
-                if (answer == "y")
+                if (answer == "Add") { App.AddNote(key, iv); }
+                else if (answer == "Read")
                 {
                     //reads the note that the user wants and returns the decrypted note
                     Console.WriteLine("Enter the name of the note you want to read");

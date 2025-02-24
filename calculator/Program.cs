@@ -9,7 +9,7 @@ namespace Test
         {
             Console.WriteLine("Enter enter a choice of a type below (must include caps):");
             Console.WriteLine("Add, Minus,Divide, Multiply, Sqrt");
-            string choice = Console.ReadLine();
+            string choice = Console.ReadLine().ToLower();
             return choice;
         }
         // gets two numbers from the user for use in later equations
@@ -25,6 +25,7 @@ namespace Test
         {
             Console.WriteLine("Do you want to continue? (Y/N)");
             string online = Console.ReadLine();
+            online = online.ToUpper();
             if (online == "Y")
             {
                 return true;
@@ -39,31 +40,31 @@ namespace Test
             do
             {
                 string choice = GetString();
-                if (choice == "Add")
+                if (choice == "add")
                 {
                     int[] nums = GetNums();
                     int sum = nums[0] + nums[1];
                     Console.WriteLine("The sum is " + sum);
                 }
-                else if (choice == "Minus")
+                else if (choice == "minus")
                 {
                     int[] nums = GetNums();
                     int sum = nums[0] - nums[1];
                     Console.WriteLine("The difference is " + sum);
                 }
-                else if (choice == "Divide")
+                else if (choice == "divide")
                 {
                     int[] nums = GetNums();
                     int sum = nums[0] / nums[1];
                     Console.WriteLine("The quotient is " + sum);
                 }
-                else if (choice == "Multiply")
+                else if (choice == "multiply")
                 {
                     int[] nums = GetNums();
                     int sum = nums[0] * nums[1];
                     Console.WriteLine("The product is " + sum);
                 }
-                else if (choice == "Sqrt")
+                else if (choice == "sqrt")
                 {
                     Console.WriteLine("Enter the number for the square root. Number must be whole.");
                     int SqrtInp = Convert.ToInt32(Console.ReadLine());

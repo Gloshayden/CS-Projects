@@ -6,6 +6,7 @@
         {
             Console.WriteLine("Do you want to continue? (Y/N)");
             string online = Console.ReadLine();
+            online = online.ToUpper();
             if (online == "Y")
             {
                 return true;

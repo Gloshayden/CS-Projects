@@ -8,6 +8,7 @@ namespace UserInfo
         {
             Console.WriteLine("Do you want to continue? (y/n)");
             string online = Console.ReadLine()!;
+            online = online.ToLower();
             if (online == "y")
             {
                 return true;

@@ -5,6 +5,7 @@ class App
     {
         Console.WriteLine("Do you want to continue? (y/n)");
         string online = Console.ReadLine()!;
+        online = online.ToLower();
         if (online == "y")
         {
             return true;
@@ -61,7 +62,6 @@ class App
         {
             string encryptedDescription = Convert.ToBase64String(encryptedDescriptionBytes);
             string path = $"notes/{note}";
-            Console.WriteLine(path);
             try
             {
                 //Write the encrypted description to the notes folder
@@ -85,8 +85,8 @@ class App
     {
         Console.WriteLine("Enter the one of the following commands");
         Console.WriteLine("Edit Description, Delete Note, Edit title, Back");
-        string command = Console.ReadLine()!;
-        if (command == "Edit Description")
+        string command = Console.ReadLine()!.ToLower();
+        if (command == "edit description")
         {
             Console.WriteLine("Enter the new description");
             string description = Console.ReadLine()!;
@@ -95,12 +95,12 @@ class App
             File.WriteAllText(path, description);
             return true;
         }
-        else if (command == "Delete Note")
+        else if (command == "delete note")
         {
             File.Delete(path);
             return false;
         }
-        else if (command == "Edit title")
+        else if (command == "edit title")
         {
             Console.WriteLine("Enter the new title");
             string title = Console.ReadLine()!;
@@ -111,7 +111,7 @@ class App
             path = newpath;
             return false;
         }
-        else if (command == "Back") { return false; }
+        else if (command == "back") { return false; }
         else{ return true; }
     }
 }

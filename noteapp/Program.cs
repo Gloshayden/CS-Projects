@@ -1,5 +1,4 @@
-﻿/* this app is far from perfect and will break if you dont put the write note name when asked 
-when i have more time i plan on fixing this but for now the program works (from what i tested)
+﻿/* this app is far from perfect but for now the program works (from what i tested)
 please let me know if you find any bugs by creating a github issue*/
 namespace noteapp
 {
@@ -8,7 +7,7 @@ namespace noteapp
         static void Main(string[] args)
         {
             // check if the password and encryption files exist
-            if (!File.Exists("key.bin") & !File.Exists("password.bin") & !File.Exists("iv.bin"))
+            if (!File.Exists("key.bin") && !File.Exists("password.bin") && !File.Exists("iv.bin"))
             {
                 EncryptionHelper.CreatePassKey();
             }
@@ -26,6 +25,7 @@ namespace noteapp
                 byte[] iv = File.ReadAllBytes("iv.bin");
                 App.NoteFolder();
                 string[] notes = App.GetNotes(key, iv);
+                Console.WriteLine();
                 while (notes == null) 
                 {
                    Console.WriteLine("Do you want to add a note? (y/n)");
@@ -33,15 +33,17 @@ namespace noteapp
                     if (nonoteanswer == "y") { App.AddNote(key, iv); } 
                     notes = App.GetNotes(key, iv);
                 }
+                Console.WriteLine("Notes:");
                 for (int i = 0; i < notes.Length; i++)
                 {
                     Console.WriteLine(notes[i]);
                 }
                 //checks if the user wants to add a note or read a note
+                Console.WriteLine();
                 Console.WriteLine("Do you want to Read or Add a note (Read/Add)");
-                string answer = Console.ReadLine()!;
-                if (answer == "Add") { App.AddNote(key, iv); }
-                else if (answer == "Read")
+                string answer = Console.ReadLine()!.ToLower();
+                if (answer == "add") { App.AddNote(key, iv); }
+                else if (answer == "read")
                 {
                     //reads the note that the user wants and returns the decrypted note
                     Console.WriteLine("Enter the name of the note you want to read");
@@ -49,6 +51,12 @@ namespace noteapp
                     byte[] encryptedNote = EncryptionHelper.EncryptString(note, key, iv);
                     string notetitle = Convert.ToHexString(encryptedNote);
                     string path = $"notes/{notetitle}";
+                    if (!File.Exists(path))
+                    {
+                        Console.WriteLine("Note not found!");
+                        Console.WriteLine();
+                        Environment.Exit(0);
+                    }
                     string[] encryptedLines = File.ReadAllLines(path);
                     for (int i = 0; i < encryptedLines.Length; i++)
                     {

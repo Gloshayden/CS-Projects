@@ -5,7 +5,7 @@
         static bool appup()
         {
             Console.WriteLine("Do you want to continue? (Y/N)");
-            string online = Console.ReadLine();
+            string online = Console.ReadLine()!;
             online = online.ToUpper();
             if (online == "Y")
             {
@@ -19,7 +19,7 @@
         static int setdiff()
         {
             Console.Write("Enter a difficulty (easy, medium, hard, insane): ");
-            string userInput = Console.ReadLine();
+            string userInput = Console.ReadLine()!;
             if (userInput == "easy")
             {
                 return 1;

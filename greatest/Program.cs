@@ -1,6 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-
-namespace greatest
+﻿namespace greatest
 {
     class Program
     {

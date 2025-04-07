@@ -1,4 +1,4 @@
-﻿namespace guessnumber
+﻿namespace leapyear
 {
     class Program
     {

@@ -66,6 +66,14 @@
                 int choice = Convert.ToInt32(Console.ReadLine());
                 while (choice != Number)
                 {
+                    if (choice > Number)
+                    {
+                        Console.WriteLine("too high");
+                    }
+                    else if (choice < Number)
+                    {
+                        Console.WriteLine("too low");
+                    }
                     Console.WriteLine("try again");
                     choice = Convert.ToInt32(Console.ReadLine());
                 }

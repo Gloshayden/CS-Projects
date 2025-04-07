@@ -7,40 +7,18 @@
             Console.WriteLine("Do you want to continue? (Y/N)");
             string online = Console.ReadLine()!;
             online = online.ToUpper();
-            if (online == "Y")
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            if (online == "Y") {return true;}
+            else {return false;}
         }
         static int setdiff()
         {
             Console.Write("Enter a difficulty (easy, medium, hard, insane): ");
             string userInput = Console.ReadLine()!;
-            if (userInput == "easy")
-            {
-                return 1;
-            }
-            else if (userInput == "medium")
-            {
-                return 2;
-            }
-            else if (userInput == "hard")
-            {
-                return 3;
-            }
-            else if (userInput == "insane")
-            {
-                return 4;
-            }
-            else
-            {
-                return 0;
-            }
-
+            if (userInput == "easy") {return 1;}
+            else if (userInput == "medium") {return 2;}
+            else if (userInput == "hard") {return 3;}
+            else if (userInput == "insane") {return 4;}
+            else {return 0;}
         }
         static int randomnum(int diffnum)
         {
@@ -66,14 +44,8 @@
                 int choice = Convert.ToInt32(Console.ReadLine());
                 while (choice != Number)
                 {
-                    if (choice > Number)
-                    {
-                        Console.WriteLine("too high");
-                    }
-                    else if (choice < Number)
-                    {
-                        Console.WriteLine("too low");
-                    }
+                    if (choice > Number) {Console.WriteLine("too high");}
+                    else if (choice < Number) {Console.WriteLine("too low");}
                     Console.WriteLine("try again");
                     choice = Convert.ToInt32(Console.ReadLine());
                 }
